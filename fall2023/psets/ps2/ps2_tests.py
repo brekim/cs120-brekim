@@ -343,42 +343,42 @@ def test():
             "input": init_tree(10).insert(11).insert(12),
             "test": lambda T: multi_getattr(T.rotate("L","R"), "right.key",  None),
             "expected": 12,
-            "show_expectation": False
+            "show_expectation": True
         },
         {
             "label": "Basic Rotate 2.1b",
             "input": init_tree(10).insert(11).insert(12),
             "test": lambda T: multi_getattr(T.rotate("L","R"), "right.right",  "dontpersist"),
             "expected": None,
-            "show_expectation": False
+            "show_expectation": True
         },
         {
             "label": "Basic Rotate 2.1c",
             "input": init_tree(10).insert(11).insert(12),
             "test": lambda T: multi_getattr(T.rotate("L","R"), "right.left.key",  None),
             "expected": 11,
-            "show_expectation": False
+            "show_expectation": True
         },
         {
             "label": "Basic Rotate 2.1d",
             "input": init_tree(10).insert(11).insert(20).insert(19).insert(21).insert(5).insert(4).insert(6),
             "test": lambda T: multi_getattr(T.rotate("L","R"), "left.right.key",  None),
             "expected": 6,
-            "show_expectation": False
+            "show_expectation": True
         },
         {
             "label": "Basic Rotate 2.1e",
             "input": init_tree(5).insert(50).insert(30).insert(25).insert(35).insert(70).insert(65).insert(75),
             "test": lambda T: multi_getattr(T.rotate("L","R"), "right.left.right.key",  None),
             "expected": 65,
-            "show_expectation": False
+            "show_expectation": True
         },
         {
             "label": "Basic Rotate 2.1f",
             "input": init_tree(200).insert(50).insert(30).insert(25).insert(35).insert(70).insert(65).insert(75),
             "test": lambda T: multi_getattr(T.rotate("R","L"), "left.right.left.key",  None),
             "expected": 35,
-            "show_expectation": False
+            "show_expectation": True
         },
     ]
     # Test height properties for rotate
