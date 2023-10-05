@@ -136,7 +136,9 @@ class BinarySearchTree:
             temp_grandchild = self.left.left.right
 
             size_node = temp_node.size
-            size_child = temp_node.left.size
+            size_right_child = 0
+            if temp_node.right is not None:
+                size_right_child = temp_node.right.size
             size_grandchild = 0
             if temp_grandchild is not None:
                 size_grandchild = temp_grandchild.size
@@ -145,42 +147,42 @@ class BinarySearchTree:
             self.left.right = temp_node
             self.left.right.left = temp_grandchild
 
-            self.left.right.size = size_child - size_node + size_grandchild
-            self.left.size = size_child
-
+            self.left.size = size_node
+            self.left.right.size = size_grandchild + size_right_child + 1
+            
         elif direction == "R" and child_side == "R":
-            print("Rotate the right child right")
-
             if self.right is None or self.right.left is None:
                 return self
-            
+
             temp_node = self.right
             temp_grandchild = self.right.left.right
 
             size_node = temp_node.size
-            size_child = temp_node.left.size
+            size_right_child = 0
+            if temp_node.right is not None:
+                size_right_child = temp_node.right.size
             size_grandchild = 0
             if temp_grandchild is not None:
                 size_grandchild = temp_grandchild.size
-
+            
             self.right = temp_node.left
             self.right.right = temp_node
             self.right.right.left = temp_grandchild
 
-            self.right.right.size = size_child - size_node + size_grandchild
-            self.right.size = size_child
+            self.right.size = size_node
+            self.right.right.size = size_grandchild + size_right_child + 1
 
         elif direction == "L" and child_side == "L":
-            print("Rotate the left child left")
-
             if self.left is None or self.left.right is None:
                 return self
-            
+
             temp_node = self.left
             temp_grandchild = self.left.right.left
 
             size_node = temp_node.size
-            size_child = temp_node.right.size
+            size_left_child = 0
+            if temp_node.left is not None:
+                size_left_child = temp_node.left.size
             size_grandchild = 0
             if temp_grandchild is not None:
                 size_grandchild = temp_grandchild.size
@@ -189,8 +191,8 @@ class BinarySearchTree:
             self.left.left = temp_node
             self.left.left.right = temp_grandchild
 
-            self.left.left.size = size_child - size_node + size_grandchild
-            self.left.size = size_child
+            self.left.size = size_node
+            self.left.left.size = size_grandchild + size_left_child + 1
 
         elif direction == "L" and child_side == "R":
             if self.right is None or self.right.right is None:
@@ -200,9 +202,10 @@ class BinarySearchTree:
             temp_grandchild = self.right.right.left
 
             size_node = temp_node.size
-            size_child = temp_node.right.size
+            size_left_child = 0
+            if temp_node.left is not None:
+                size_left_child = temp_node.left.size
             size_grandchild = 0
-
             if temp_grandchild is not None:
                 size_grandchild = temp_grandchild.size
             
@@ -210,9 +213,9 @@ class BinarySearchTree:
             self.right.left = temp_node
             self.right.left.right = temp_grandchild
 
-            self.right.left.size = size_child - size_node + size_grandchild
-            self.right.size = size_child
-
+            self.right.size = size_node
+            self.right.left.size = size_grandchild + size_left_child + 1
+            
         return self
 
     def print_bst(self):
