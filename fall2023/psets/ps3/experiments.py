@@ -26,7 +26,6 @@ seventeen_id = 7
 temp_id = 8   # Used only in prog2
 W_id = 9       # Used only in prog2
 
-# TODO: Fill in prog1 with the first RAM program provided in the homework.
 prog1 = [8, 
     ['assign', zero_id, 0],
     ['assign', one_id, 1], 
@@ -43,7 +42,6 @@ prog1 = [8,
     ['write', output_ptr_id, result_id]
 ]
 
-# TODO: Fill in prog2 with the second RAM program provided in the homework.
 prog2 = [10, 
     ['assign', zero_id, 0],
     ['assign', one_id, 1], 
