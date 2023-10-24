@@ -132,33 +132,33 @@ def bfs_2_coloring(G, precolored_nodes=None):
     # Pick a random node to start from
     random_node = random.randint(0, G.N - 1)
 
-    s = []
+    # instead of s, using visited
     G.colors[random_node] = 0
-    f = [random_node]
+    f = {random_node}
 
     # BFS order
-    while len(s) != G.N:
+    while len(visited) != G.N:
         # checks for disconnected graphs
         if len(f) == 0:
             for i in range(G.N):
-                if i not in s:
+                if i not in visited:
                     G.colors[i] = 0
-                    f = [i]
+                    f = {i}
                     break
 
-        new_f = []
+        new_f = set()
         for parent_node in f:
             for child_node in G.edges[parent_node]:
                 # if child_node hasn't been accounted for, add to the list
-                if child_node not in f and child_node not in s and child_node not in new_f:
-                    new_f.append(child_node)
+                if child_node not in f and child_node not in visited and child_node not in new_f:
+                    new_f.update({child_node})
                     # print(child_node)
 
                     if G.colors[parent_node] == 0:
                         G.colors[child_node] = 1
                     elif G.colors[parent_node] == 1:
                         G.colors[child_node] = 0
-        s += f # s union f
+        visited.update(f) # s union f
         f = new_f
     
     # print(len(s))
