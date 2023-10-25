@@ -152,7 +152,6 @@ def bfs_2_coloring(G, precolored_nodes=None):
                 # if child_node hasn't been accounted for, add to the list
                 if child_node not in f and child_node not in visited and child_node not in new_f:
                     new_f.update({child_node})
-                    # print(child_node)
 
                     if G.colors[parent_node] == 0:
                         G.colors[child_node] = 1
@@ -160,8 +159,6 @@ def bfs_2_coloring(G, precolored_nodes=None):
                         G.colors[child_node] = 0
         visited.update(f) # s union f
         f = new_f
-    
-    # print(len(s))
 
     if G.is_graph_coloring_valid():
         return G.colors
@@ -211,7 +208,6 @@ def is_independent_set(G, subset):
 # If successful, modifies G.colors and returns the coloring.
 # If no coloring is possible, resets all of G's colors to None and returns None.
 def iset_bfs_3_coloring(G):
-    # cycle through all combinations 1 to G.N // 3
     for i in range(1, min(G.N // 3 + 2, G.N)):
         for combination in combinations(range(G.N), i):
             subset = set(combination)
