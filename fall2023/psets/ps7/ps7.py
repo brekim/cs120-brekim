@@ -190,7 +190,21 @@ def iset_bfs_3_coloring(G):
 def sat_3_coloring(G):
     solver = Glucose3()
 
-    # TODO: Add the clauses to the solver
+    # clause 1: each node has at least one color
+    for node in range(G.N):
+        solver.add_clause([node * 3 + 1, node * 3 + 2, node * 3 + 3])
+    
+    # clause 2: each node has at most one color
+    for node in range(G.N):
+        solver.add_clause([-(node * 3 + 1), -(node * 3 + 2)])
+        solver.add_clause([-(node * 3 + 2), -(node * 3 + 3)])
+        solver.add_clause([-(node * 3 + 3), -(node * 3 + 1)])
+
+    # clause 3: adjacent nodes are different colors
+    for node in range(G.N):
+        for edge_node in G.edges[node]:
+            for color in range(1, 4):
+                solver.add_clause([-(node * 3 + color), -(edge_node * 3 + color)])
 
     # Attempt to solve, return None if no solution possible
     if not solver.solve():
@@ -201,6 +215,12 @@ def sat_3_coloring(G):
     solution = solver.get_model()
 
     # TODO: If a solution is found, convert it into a coloring and update G.colors
+    for node in range(G.N):
+        for color in range(1, 4):
+            node_color = node * 3 + color
+            if node_color in solution:
+                G.colors[node] = color
+                break
 
     return G.colors
 
