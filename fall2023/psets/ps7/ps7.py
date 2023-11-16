@@ -214,7 +214,7 @@ def sat_3_coloring(G):
     # Accesses the model in form [-v1, v2, -v3 ...], which denotes v1 = False, v2 = True, v3 = False, etc.
     solution = solver.get_model()
 
-    # TODO: If a solution is found, convert it into a coloring and update G.colors
+    # convert to a coloring and update G.colors
     for node in range(G.N):
         for color in range(1, 4):
             node_color = node * 3 + color
